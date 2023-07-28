@@ -27,13 +27,13 @@ public class BallMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D hit)
     {
-        if (hit.GameObject.tag == "Player")
+        if (hit.gameObject.tag == "Player")
         {
             rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y);
         }
-        else if (hit.GameObject.tag == "Wall")
+        else if (hit.gameObject.tag == "Wall")
         {
-            rb.velocity = new Vector2(rb.velocity.x, -rb.velocity.y);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * -1);
         }
         
     }
