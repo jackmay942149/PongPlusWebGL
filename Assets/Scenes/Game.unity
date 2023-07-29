@@ -997,7 +997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballMovement: {fileID: 700766451}
-  speed: 1
+  speed: 5
 --- !u!50 &858477841
 Rigidbody2D:
   serializedVersion: 4
