@@ -6,8 +6,8 @@ public class BallMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
     private Rigidbody2D rb;
-    private float ydir;
-    private float xdir;
+    private float yspeed;
+    private float xspeed;
     
     void Start()
     {
@@ -22,18 +22,24 @@ public class BallMovement : MonoBehaviour
     
     private void InitialMove()
     {
-        rb.velocity = new Vector2(speed * 0.7f, speed * 0.7f);
+        xspeed = speed * 0.7f;
+        yspeed = speed * 0.7f;
+        rb.velocity = new Vector2(xspeed, yspeed);
     }
 
     void OnCollisionEnter2D(Collision2D hit)
     {
         if (hit.gameObject.tag == "Player")
         {
-            rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y);
+            xspeed *= -1.1f;
+            yspeed *= 1.1f;
+            rb.velocity = new Vector2(xspeed, yspeed);
         }
         else if (hit.gameObject.tag == "Wall")
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * -1);
+            yspeed *= -1.0f;
+            rb.velocity = new Vector2(xspeed, yspeed);
+            Debug.Log(rb.velocity.y);
         }
         
     }
