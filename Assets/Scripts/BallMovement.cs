@@ -8,6 +8,10 @@ public class BallMovement : MonoBehaviour
     private Rigidbody2D rb;
     private float yspeed;
     private float xspeed;
+
+    public float Yspeed {
+        get {return yspeed;}
+    }
     
     void Start()
     {
@@ -39,7 +43,6 @@ public class BallMovement : MonoBehaviour
         {
             yspeed *= -1.0f;
             rb.velocity = new Vector2(xspeed, yspeed);
-            Debug.Log(rb.velocity.y);
         }
         
     }
