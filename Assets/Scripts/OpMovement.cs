@@ -9,7 +9,12 @@ public class OpMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     [SerializeField] private float speed;
-    private float slowSpeed;
+    private float ballYSpeed;
+    private float ballXSpeed;
+    private float ballXPos;
+    private float ballYPos;
+
+    private float predictedYPos;
 
     void Start()
     {
@@ -19,24 +24,35 @@ public class OpMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Mathf.Abs(ballMovement.transform.position.y - this.transform.position.y) < 0.1f)
+
+        if (predictedYPos - this.transform.position.y > 0)
         {
-            slowSpeed = ballMovement.GetComponent<BallMovement>().Yspeed;
+            rb.velocity = new Vector2(0.0f, speed);
+        }
+        else if (predictedYPos - this.transform.position.y < 0)
+        {
+            rb.velocity = new Vector2(0.0f, -speed);
         }
         else
         {
-            slowSpeed = speed;
+            rb.velocity = new Vector2(0.0f, 0.0f);
         }
+    }
+
+    public void PredictPosition()
+    {
+        ballXPos = ballMovement.transform.position.x;
+        ballYPos = ballMovement.transform.position.y;
+
+        ballScript = ballMovement.GetComponent<BallMovement>();
+        ballXSpeed = ballScript.XSpeed;
+        ballYSpeed = ballScript.YSpeed;
+
+        float angle = Mathf.Tan(ballYSpeed/ballXSpeed);
+        float ballSpeed = Mathf.Sqrt(Mathf.Pow(ballXSpeed, 2) + Mathf.Pow(ballYSpeed, 2));
+        predictedYPos = ballSpeed * Mathf.Sin(angle);
 
 
-        if (ballMovement.transform.position.y > this.transform.position.y) 
-        {
-            rb.velocity = new Vector2(0.0f, slowSpeed);
-        }
-        else
-        {
-            rb.velocity = new Vector2(0.0f, -slowSpeed);
-        }
-
+        Debug.Log(predictedYPos);
     }
 }

@@ -9,8 +9,14 @@ public class BallMovement : MonoBehaviour
     private float yspeed;
     private float xspeed;
 
-    public float Yspeed {
+    [SerializeField] private GameObject opponent;
+
+    public float YSpeed {
         get {return yspeed;}
+    }
+
+    public float XSpeed {
+        get {return xspeed;}
     }
     
     void Start()
@@ -39,11 +45,14 @@ public class BallMovement : MonoBehaviour
             yspeed *= 1.1f;
             rb.velocity = new Vector2(xspeed, yspeed);
         }
+
         else if (hit.gameObject.tag == "Wall")
         {
             yspeed *= -1.0f;
             rb.velocity = new Vector2(xspeed, yspeed);
         }
-        
+
+
+        opponent.GetComponent<OpMovement>().PredictPosition();
     }
 }
