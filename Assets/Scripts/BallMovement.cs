@@ -5,6 +5,7 @@ using UnityEngine;
 public class BallMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private float speedMulti;
     private Rigidbody2D rb;
     private float yspeed;
     private float xspeed;
@@ -41,8 +42,8 @@ public class BallMovement : MonoBehaviour
     {
         if (hit.gameObject.tag == "Player")
         {
-            xspeed *= -1.1f;
-            yspeed *= 1.1f;
+            xspeed *= -speedMulti;
+            yspeed *= speedMulti;
             rb.velocity = new Vector2(xspeed, yspeed);
         }
 

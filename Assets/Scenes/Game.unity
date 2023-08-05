@@ -851,6 +851,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  speedMulti: 1.01
+  opponent: {fileID: 858477836}
 --- !u!1 &858477836
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,7 +1015,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
